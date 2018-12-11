@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const sqlite3 = require("sqlite3");
+const path = require("path");
 let db;
 function setup() {
-    db = new sqlite3.Database("../metadata.db", sqlite3.OPEN_READONLY);
+    const dbpath = path.join(__dirname, "../metadata.db");
+    db = new sqlite3.Database(dbpath, sqlite3.OPEN_READONLY);
 }
 exports.setup = setup;
 function authors() {

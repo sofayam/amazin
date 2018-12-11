@@ -8,8 +8,8 @@ db.setup();
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "hbs");
 
-app.get('/', function (req, res) {
-  let authors = db.authors();
+app.get('/', async function (req, res) {
+  let authors = await db.authors();
   res.render("hello", { param: "world", authors});
 });
 
