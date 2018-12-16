@@ -9,8 +9,22 @@ app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "hbs");
 
 app.get('/', async function (req, res) {
-  let authors = await db.authors();
-  res.render("hello", { param: "world", authors});
+
+  res.render("index");
+});
+
+app.get('/authors', async function (req, res) {
+  let hint;
+  if (req.query && req.query.qry) hint = req.query.qry;
+  let authors = await db.authors(hint);
+  res.render("authors", { authors });
+});
+
+app.get('/books', async function (req, res) {
+  let hint;
+  if (req.query && req.query.qry) hint = req.query.qry;
+  let books = await db.books(hint);
+  res.render("books", { books });
 });
 
 app.listen(3000, function () {

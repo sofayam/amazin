@@ -8,9 +8,13 @@ function setup() {
     db = new sqlite3.Database(dbpath, sqlite3.OPEN_READONLY);
 }
 exports.setup = setup;
-function authors() {
+function authors(hint) {
+    let qry = "select name, id from authors";
+    if (hint) {
+        qry += " where name like '%" + hint + "%'";
+    }
     return new Promise((resolve) => {
-        db.all("select name from authors", [], (err, rows) => {
+        db.all(qry, [], (err, rows) => {
             if (err) {
                 resolve([]);
             }
@@ -21,4 +25,21 @@ function authors() {
     });
 }
 exports.authors = authors;
+function books(hint) {
+    let qry = "select title, author_sort, id from books";
+    if (hint) {
+        qry += " where title like '%" + hint + "%'";
+    }
+    return new Promise((resolve) => {
+        db.all(qry, [], (err, rows) => {
+            if (err) {
+                resolve([]);
+            }
+            else {
+                resolve(rows);
+            }
+        });
+    });
+}
+exports.books = books;
 //# sourceMappingURL=db.js.map

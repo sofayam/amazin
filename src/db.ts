@@ -10,9 +10,13 @@ export function setup() {
 
 }
 
-export function authors(): Promise<any> {
+export function authors(hint?: string): Promise<any> {
+    let qry = "select name, id from authors";
+    if (hint) {
+        qry += " where name like '%" + hint + "%'"; 
+    }
     return new Promise<any>((resolve) => {
-        db.all("select name from authors", [], (err, rows) => {
+        db.all(qry, [], (err, rows) => {
             if (err) {
                 resolve([]);
             } else {
@@ -22,3 +26,18 @@ export function authors(): Promise<any> {
     })
 }
 
+export function books(hint?: string): Promise<any> {
+    let qry = "select title, author_sort, id from books";
+    if (hint) {
+        qry += " where title like '%" + hint + "%'"; 
+    }
+    return new Promise<any>((resolve) => {
+        db.all(qry, [], (err, rows) => {
+            if (err) {
+                resolve([]);
+            } else {
+                resolve(rows)
+            }
+        });
+    })
+}
