@@ -1,0 +1,1 @@
+select books.title from books_authors_link  inner join books where books.id = books_authors_link.book and books_authors_link.author =

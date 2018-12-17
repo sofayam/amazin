@@ -3,7 +3,8 @@
 {{#each books }}
 
 <li>
-    {{ this.author_sort }} : {{ this.title }}
+    <a href=/author?qry={{this.authorid}}>{{ this.author_sort }}</a> : 
+    <a href=/book?qry={{this.bookid}}>{{ this.title }}</a>
 </li>
 
 

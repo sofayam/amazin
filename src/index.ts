@@ -27,6 +27,23 @@ app.get('/books', async function (req, res) {
   res.render("books", { books });
 });
 
+
+app.get('/author', async function (req, res) {
+  let id;
+  if (req.query && req.query.qry) id = req.query.qry;
+  let {name, books} = await db.author(id);
+  res.render("author", { name, books });
+});
+
+
+app.get('/book', async function (req, res) {
+  let id;
+  if (req.query && req.query.qry) id = req.query.qry;
+  let book = await db.book(id);
+  res.render("book", { book });
+});
+
+
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
 });
