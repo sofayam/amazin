@@ -4,6 +4,7 @@ const express = require("express");
 const path = require("path");
 const db = require("./db");
 var app = express();
+const port = 3001;
 db.setup();
 app.set("views", path.join(__dirname, "../views"));
 app.set("view engine", "hbs");
@@ -38,7 +39,7 @@ app.get('/book', async function (req, res) {
     let book = await db.book(id);
     res.render("book", { book });
 });
-app.listen(3000, "127.0.0.1", function () {
-    console.log('Listening on port 3000 locally!');
+app.listen(3001, "127.0.0.1", function () {
+    console.log('Listening on port ' + port + ' locally!');
 });
 //# sourceMappingURL=index.js.map
