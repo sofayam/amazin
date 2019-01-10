@@ -3,6 +3,8 @@ import * as path from "path";
 import * as db from "./db";
 var app = express();
 
+const port = 3001;
+
 db.setup();
 
 app.set("views", path.join(__dirname, "../views"));
@@ -44,6 +46,6 @@ app.get('/book', async function (req, res) {
 });
 
 
-app.listen(3000, "127.0.0.1", function () {
-  console.log('Listening on port 3000 locally!');
+app.listen(3001, "127.0.0.1", function () {
+  console.log('Listening on port ' + port + ' locally!');
 });
